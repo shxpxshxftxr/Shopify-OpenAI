@@ -1,5 +1,9 @@
 # Haiku AI
-A simple SPA to submit themes to the OpenAI API (https://beta.openai.com/overview) to receive a special Haiku from the curie AI model. Built for the Shopify Internship Challenge 2022.
+A simple SPA to submit themes to the OpenAI API (https://beta.openai.com/overview) to receive a special Haiku from the curie AI model.
+The AI model I'm using needs fine-tuning, as it doesn't always provide a true Haiku, but it consistently gives users tiny introspective poems from its tiny virtual heart.
+Built for the Shopify Internship Challenge 2022.
+
+Check it out on haikuai.herokuapp.com
 
 
 # Getting Started 
