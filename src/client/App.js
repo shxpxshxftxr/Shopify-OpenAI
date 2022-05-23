@@ -34,7 +34,7 @@ export default function App() {
     const data = await response.json();
     const haiku = data.choices[0].text;
 
-    setResults((Results) => [...Results, [promptInput, haiku]]);
+    setResults((haikus) => [[promptInput, haiku],...haikus]);
     setPromptInput("");
   }
 
@@ -46,7 +46,7 @@ export default function App() {
           Submit a theme to this AI and it will generate an original Haiku!
         </h3>
       </header>
-      <label for="prompt">Enter Prompt Here:</label>
+      <label htmlFor="prompt">Enter Prompt Here:</label>
       <form onSubmit={onSubmit}>
         <input
           type="text"
@@ -57,9 +57,9 @@ export default function App() {
         <button type="submit">Submit Prompt</button>
       </form>
       <section title="All Haikus">
-        {results.reverse().map((completion, index) => {
+        {results.map((completion, index) => {
           return (
-            <article className="results" key={index}>
+            <article className="haikus" key={index}>
               <h5>Theme: {completion[0]}</h5>
               <h5>{completion[1]}</h5>
             </article>
