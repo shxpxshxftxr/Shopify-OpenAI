@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import generatePrompt from "../api/haikus";
+import generatePrompt from "./helperHaikus";
 
 export default function App() {
   const key = process.env.REACT_APP_OPENAI_API_KEY;
@@ -12,7 +12,7 @@ export default function App() {
 
     const aiAnswers = {
       prompt: generatePrompt(promptInput),
-      temperature: 0.3,
+      temperature: 0.6,
       max_tokens: 32,
       top_p: 1,
       frequency_penalty: 0.0,
@@ -34,7 +34,7 @@ export default function App() {
     const data = await response.json();
     const haiku = data.choices[0].text;
 
-    setResults((Results) => [...Results, [promptInput, haiku]]);
+    setResults((haikus) => [[promptInput, haiku],...haikus]);
     setPromptInput("");
   }
 
@@ -46,7 +46,7 @@ export default function App() {
           Submit a theme to this AI and it will generate an original Haiku!
         </h3>
       </header>
-      <label for="prompt">Enter Prompt Here:</label>
+      <label htmlFor="prompt">Enter Prompt Here:</label>
       <form onSubmit={onSubmit}>
         <input
           type="text"
@@ -54,12 +54,12 @@ export default function App() {
           value={promptInput}
           onChange={(event) => setPromptInput(event.target.value)}
         />
-        <button type="submit">Submit Prompt</button>
+        <button type="submit">Submit</button>
       </form>
-      <section title="All Haikus">
-        {results.reverse().map((completion, index) => {
+      <section title="Haikus by AI">
+        {results.map((completion, index) => {
           return (
-            <article className="results" key={index}>
+            <article key={index}>
               <h5>Theme: {completion[0]}</h5>
               <h5>{completion[1]}</h5>
             </article>

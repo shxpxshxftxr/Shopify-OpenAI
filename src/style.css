@@ -1,42 +1,58 @@
 body {
   margin: 0;
-  font-family: 'Courier Prime', monospace;
+  font-family: "Courier Prime", monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
 main {
   text-align: center;
-  background-color: #282c34;
+  padding: 4rem;
+  background-image: repeating-conic-gradient( rgb(222, 213, 179) 10%, rgb(217, 131, 147) 20%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
-}
-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  color: #f4f4f4;
 }
 
 article {
-  font-family: 'Goudy Bookletter 1911', serif;
+  font-family: "Goudy Bookletter 1911", serif;
   font-size: 2rem;
-  background-color: #632626;
-  margin: 2rem;
-  padding: .5rem;
-  border: .25rem solid #632626;
+  width: 16rem;
+  background-color: #227ba1;
+  margin: 5rem 2rem 2rem 2rem;
+  padding: 0.5rem;
+  border: 0.10rem solid #f4f4f4;
   border-radius: 5rem;
+}
+
+header h1 {
+  font-size: 4rem;
+  -webkit-text-stroke-width: .1rem;
+  -webkit-text-stroke-color: black;
+}
+header h3, label {
+  -webkit-text-stroke-width: .030rem;
+  -webkit-text-stroke-color: black;
+  font-size: 1.5rem
+}
+form {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  width: 18rem;
+  height:1.5rem;
+  font-size: 1.5rem;
 
 }
- header h1 {
-   font-size: 4rem;
- }
+button {
+  background-color: #f4f4f4;
+  color: #227ba1;
+  font-weight: bold;
+  height: 1.75rem
+}
