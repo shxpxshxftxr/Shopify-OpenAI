@@ -1,10 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import generatePrompt from "./api/haikus"
+import generatePrompt from "../api/haikus";
 
 export default function App() {
-
-
   const key = process.env.REACT_APP_OPENAI_API_KEY;
   const [promptInput, setPromptInput] = useState("");
   const [results, setResults] = useState([]);
@@ -14,12 +12,13 @@ export default function App() {
 
     const aiAnswers = {
       prompt: generatePrompt(promptInput),
-      temperature: .3,
+      temperature: 0.3,
       max_tokens: 32,
       top_p: 1,
       frequency_penalty: 0.0,
       presence_penalty: 0.0,
     };
+
     const response = await fetch(
       "https://api.openai.com/v1/engines/text-curie-001/completions",
       {
@@ -31,13 +30,13 @@ export default function App() {
         body: JSON.stringify(aiAnswers),
       }
     );
+
     const data = await response.json();
-    const haiku = data.choices[0].text
-    setResults((Results) => [...Results, [promptInput, haiku]])
+    const haiku = data.choices[0].text;
+
+    setResults((Results) => [...Results, [promptInput, haiku]]);
     setPromptInput("");
   }
-
-  console.log("results:",results);
 
   return (
     <main>
@@ -47,7 +46,7 @@ export default function App() {
           Submit a theme to this AI and it will generate an original Haiku!
         </h3>
       </header>
-      <label htmlFor="prompt">Enter Prompt Here:</label>
+      <label for="prompt">Enter Prompt Here:</label>
       <form onSubmit={onSubmit}>
         <input
           type="text"
@@ -57,14 +56,16 @@ export default function App() {
         />
         <button type="submit">Submit Prompt</button>
       </form>
-      {results.reverse().map((completion, index) => {
-        return (
-          <article className="results" key={index}>
-            <h5>Prompt: {completion[0]}</h5>
-            <h5>Haiku: {completion[1]}</h5>
-          </article>
-        );
-      })}
+      <section title="All Haikus">
+        {results.reverse().map((completion, index) => {
+          return (
+            <article className="results" key={index}>
+              <h5>Theme: {completion[0]}</h5>
+              <h5>{completion[1]}</h5>
+            </article>
+          );
+        })}
+      </section>
     </main>
   );
 }
