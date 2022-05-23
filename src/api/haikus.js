@@ -1,4 +1,3 @@
-
 export default function generatePrompt(theme) {
   const capitalizedTheme =
     theme[0].toUpperCase() + theme.slice(1).toLowerCase();
