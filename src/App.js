@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import generatePrompt from "../api/haikus";
+import generatePrompt from "./helperHaikus";
 
 export default function App() {
   const key = process.env.REACT_APP_OPENAI_API_KEY;
@@ -12,7 +12,7 @@ export default function App() {
 
     const aiAnswers = {
       prompt: generatePrompt(promptInput),
-      temperature: 0.3,
+      temperature: 0.6,
       max_tokens: 32,
       top_p: 1,
       frequency_penalty: 0.0,
@@ -54,12 +54,12 @@ export default function App() {
           value={promptInput}
           onChange={(event) => setPromptInput(event.target.value)}
         />
-        <button type="submit">Submit Prompt</button>
+        <button type="submit">Submit</button>
       </form>
-      <section title="All Haikus">
+      <section title="Haikus by AI">
         {results.map((completion, index) => {
           return (
-            <article className="haikus" key={index}>
+            <article key={index}>
               <h5>Theme: {completion[0]}</h5>
               <h5>{completion[1]}</h5>
             </article>
