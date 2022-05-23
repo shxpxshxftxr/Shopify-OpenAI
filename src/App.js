@@ -3,9 +3,11 @@ import { useState } from "react";
 import generatePrompt from "./api/haikus"
 
 export default function App() {
+
+
   const key = process.env.REACT_APP_OPENAI_API_KEY;
   const [promptInput, setPromptInput] = useState("");
-  const [results, setResults] = useState();
+  const [results, setResults] = useState([]);
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -30,13 +32,12 @@ export default function App() {
       }
     );
     const data = await response.json();
-    setResults(data.choices[0].text);
+    const haiku = data.choices[0].text
+    setResults((Results) => [...Results, [promptInput, haiku]])
     setPromptInput("");
-    console.log("response:", data);
   }
 
   console.log("results:",results);
-  console.log("prompt:",promptInput);
 
   return (
     <main>
@@ -56,15 +57,14 @@ export default function App() {
         />
         <button type="submit">Submit Prompt</button>
       </form>
-      <div>{results}</div>
-      {/* {Results.map((completion, index) => {
+      {results.reverse().map((completion, index) => {
         return (
           <article className="results" key={index}>
             <h5>Prompt: {completion[0]}</h5>
             <h5>Haiku: {completion[1]}</h5>
           </article>
         );
-      })} */}
+      })}
     </main>
   );
 }
